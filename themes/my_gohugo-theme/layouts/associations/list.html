@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+
+<title> {{ .Title }}</title>
+<body>
+
+<!-- Mes fichiers membres -->
+{{ partial "head.html" . }}
+{{ partial "header.html" . }}
+
+{{ range (where .Site.RegularPages "Section" "associations")}}
+	<div class="card">
+	  <h4 class="card-header">{{ .Title }}</h4>
+	  <div class="card-body">
+	    <h5 class="card-title">Description :</h5>
+	    <p class="card-text">{{ .Summary}}</p>
+	    <a href="/associations/{{ lower .Title }}" class="btn btn-primary">Events linked</a>
+	  </div>
+	</div>
+	{{ end}}
+</body>
+
+{{ partial "footer.html" . }}
+
+</html>

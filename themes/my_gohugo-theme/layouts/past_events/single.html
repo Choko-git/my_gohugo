@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+
+<title> {{ .Title }}</title>
+<body>
+
+<!-- Mes fichiers membres -->
+{{ partial "head.html" . }}
+{{ partial "header.html" . }}
+
+<div id="Body">
+	<div id="mainBody">
+		{{ .Title }}
+		{{ range .Pages}}
+		<!-- {{.Params.nom}} Afficher un param custom -->
+		{{ end}}
+
+</div>
+</div>
+
+
+</body>
+
+{{ partial "footer.html" . }}
+
+</html>

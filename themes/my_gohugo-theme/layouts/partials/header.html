@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<header class="page-header">
+	<!-- Lien vers le fichier css du header. -->
+<main>
+   <div class="title">
+
+        <h1>French town halls !</h1>
+        <h3>Welcome to our events calendar !</h3>
+    </div>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- MENU VERTICALE -->
+
+<nav role="navigation1">
+  <div id="menuToggle1">
+
+    <input type="checkbox" />
+
+    <span></span>
+    <span></span>
+    <span></span>
+
+    <ul id="menu1">
+      <a href="/"><li>Home</li></a>
+      <a href="/associations"><li>Associations</li></a>
+      <a href="/events_upcoming"><li>Events</li></a>
+      <a href="/contact"><li>Contact us</li></a>
+    </ul>
+  </div>
+</nav>
+  <a class="navbar-brand" href="/">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item active">
+        <a class="nav-link" href="/council_member">Municipal council <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/associations">Associations</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Events
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/past_events">Past events</a>
+          <a class="dropdown-item" href="/events_upcoming">Events upcoming</a>
+          <a class="dropdown-item" href="/calandar">Calandar</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/contact">Contact us</a>
+      </li>
+    </ul>
+
+    <form class="form-inline my-2 my-lg-0" id="search">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search associations..." v-model="txt" @keyup="search()" @blur="close()" maxlength="50">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <div class="search-results" :style="{'display': showresult?'block':'none'}">
+        <a v-for="item in result" :href="item.url">{{ printf "{{ item.title }}" }}</a>
+    </div>
+</form>
+  </div>
+
+</nav>
+
+<style type="text/css">
+
+.navigation1
+{
+  
+  margin: 0;
+  padding: 0;
+  background: white;
+  color:white;
+  font-family: "Avenir Next", "Avenir", sans-serif;
+}
+
+.navigation1 #menuToggle1 a
+{
+  text-decoration: none;
+  color: #232323;
+  
+  transition: color 0.3s ease;
+}
+
+
+#menuToggle1
+{
+  display: block;
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  
+  z-index: 1;
+  
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle1 input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  
+  cursor: pointer;
+  
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+  
+  -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+#menuToggle1 span
+{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  
+  background: #cdcdcd;
+  border-radius: 3px;
+  
+  z-index: 1;
+  
+  transform-origin: 4px 0px;
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle1 span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle1 span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+
+
+#menuToggle1 input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #232323;
+}
+
+
+#menuToggle1 input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+#menuToggle1 input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+#menu1
+{
+  position: fixed;
+  width: 300px;
+  margin: -100px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+  
+  background: #ededed;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+
+
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu1 li
+{
+  padding: 10px 0;
+  font-size: 22px;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle1 input:checked ~ ul
+{
+  transform: none;
+}
+
+
+
+</style>
+
+<!-- modules -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+
+<script>
+let vuesearch = new Vue({
+    el: '#search', // div ID
+    data: {
+        txt: '', // will contain the text written by user
+        timeoutID: 0, // used to detect when the user stopped typing
+        showresult: false, // show the result dropdown, or not
+        result: {}, // results to display, as JSON : {[ {"url":"", "title":""},..] }
+        bdd: [] // will contain the full JSON file created by HUGO
+        },
+    mounted: function() {
+        // loading the full JSON to 'bdd'
+        axios.get('{{ with .Site.GetPage "/search.md" }}{{ .Permalink }}{{ end }}')
+        .then(function (response) {
+            vuesearch.bdd = response.data.results;
+            })
+        .catch(function (error) {
+            console.log(error);
+            });
+        },
+    methods: {
+        close: function() {
+            // Close the dropdown when the input search loses focus
+            // with a 300ms delay to let time for the click on link to work
+            setTimeout(function() {
+                vuesearch.showresult = false;
+                vuesearch.txt = '';
+                }, 300);
+            },
+        search: function() {
+            // we will search when the user stopped typing for 500ms
+            clearTimeout(this.timeoutID);
+            this.timeoutID = setTimeout(this.dosearch, 500);
+            },
+        dosearch: function() {
+            // do the search in the 'bdd'
+            this.result = []; // clear previous result
+            let words = this.txt.split(' '); // split typed text with spaces
+            let words2 = []; // words that will be searched
+            words.forEach(function(element) { // to skip empty words, if multiple spaces typed (i.e "a  b c")
+                if(element) {words2.push(element);}
+                });
+            let r;
+            let resultmp;
+            words2.forEach(function(e) { // for each word
+                r = vuesearch.bdd.filter(p => p.content.indexOf(e.toLowerCase()) !== -1);
+                if(vuesearch.result.length===0) {vuesearch.result = r.slice(); return;}
+                resultmp = [];
+                vuesearch.result.forEach(function(all1) {
+                    r.forEach(function(all2) { // we want AND for words
+                        if(all1.url===all2.url) {resultmp.push(all1);}
+                        });
+                    });
+                vuesearch.result = resultmp.slice();
+                });
+            this.result = this.result.slice(0, 10); // 10 results max
+            this.showresult = (this.result.length>0); // show results if we have one or more
+            } // dosearch
+        } // methods
+    }); // Vue
+</script>
+</main> 
+</header>
+</html>
+

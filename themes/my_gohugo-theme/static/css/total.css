@@ -1,0 +1,253 @@
+/*#####################HEADER#########################*/
+
+/*Barre de recherche*/
+.search {
+  position: relative;
+  display: inline-block;
+  }
+.search-results {
+  display: none;
+  background-color: #fff;
+  position: absolute;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  }
+.search-results a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  }
+.search-results a:hover {background-color: #ddd;}
+
+
+/*Les titres*/
+.page-header .title{
+	margin-top: 0%;
+	text-align: center;
+	position: 100px, 50px;
+	font: italic 2em "Fira Sans", serif;
+	font: italic 1.5em "Fira Sans", serif;
+	color:white;
+}
+
+/*Couleur du background header */
+.page-header{
+	background-image: url("/images/ripa.png");
+	background-size: 100%;
+	
+}
+
+
+.navbar{
+  background-color:  #3498db;
+	height: 100%;
+	margin-top: 5%;
+}
+
+
+/*MENU HAMBURGER*/
+
+
+/*######################FOOTER#############################*/
+
+
+.container{
+
+    height: auto;
+
+}
+
+footer{
+	width: 100%;
+	height: auto;
+	margin: auto;
+	background: #272727;
+	padding: 20px 0px;
+	display: flex;
+	justify-content: space-around;
+}
+
+
+.footer-social-icons .pl{
+	text-align: center;
+}
+
+
+footer .form-group label{
+	padding-right:  2%;	
+	color: white;
+	font-family: 'Poppins', sans-serif;
+}
+
+footer .form-group select{
+	margin-right: 5px;
+
+}
+
+/*Icones de réseaux sociaux*/
+.footer-social-icons .pl li{
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	margin: 10px 10px;
+	border-radius: 100%;
+	background: #32CD32;
+
+}
+
+.footer-social-icons .pl li a{
+	color: #272727;
+	font-size: 25px;
+	display: block;
+}
+
+.footer-social-icons .pl li a i{
+	line-height: 50px;
+}
+
+.footer-menu-one{
+	width: 100%;
+	height: auto;
+	margin: auto;
+  
+}
+.footer-menu-one ul{
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+
+}
+
+.footer-menu-one ul li{
+	display: inline-block;
+	margin: 0px 15px;
+
+}
+
+/*Police d'écriture de mes boutons du footer*/
+.footer-menu-one ul li a{
+	font-family: arial;
+	font-size: 15px;
+	font-weight: 600;
+	color: #fff;
+	text-transform: uppercase;
+  text-decoration: none;
+
+}
+
+/*Couleur des boutons dans le footer lorsqu'on les survoles avec la souris*/
+.footer-menu-one ul li a:hover{
+  color: #FBC638
+}
+
+
+/*Bouton SEND dynamique */
+@import url('https://fonts.googleapis.com/css?family=Poppins:900i');
+
+* {
+  margin: 0px;
+  box-sizing: border-box;
+  
+}
+
+
+/*Position du bouton*/
+.wrapper {
+ display: flex;
+ justify-content: center;
+
+}
+
+.cta {
+    display: flex;
+    padding: 1px 15px;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    color: white;
+    background: #96A0A9;
+    transition: 1s;
+    box-shadow: 6px 6px 0 black;
+    transform: skewX(-15deg);
+}
+
+.cta:focus {
+   outline: none; 
+}
+
+.cta:hover {
+    transition: 0.5s;
+    box-shadow: 10px 10px 0 #FBC638;
+}
+
+.cta span:nth-child(2) {
+    transition: 0.5s;
+    margin-right: 0px;
+}
+
+.cta:hover  span:nth-child(2) {
+    transition: 0.5s;
+    margin-right: 45px;
+}
+
+  span {
+    transform: skewX(15deg) 
+  }
+
+  span:nth-child(2) {
+    width: 10px;
+    margin-left: 10px;
+    position: relative;
+    top: 10%;
+  }
+  
+/**************SVG****************/
+
+path.one {
+    transition: 0.4s;
+    transform: translateX(-60%);
+}
+
+path.two {
+    transition: 0.5s;
+    transform: translateX(-30%);
+}
+
+.cta:hover path.three {
+    animation: color_anim 1s infinite 0.2s;
+}
+
+.cta:hover path.one {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.6s;
+}
+
+.cta:hover path.two {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.4s;
+}
+
+/* SVG animations */
+
+@keyframes color_anim {
+    0% {
+        fill: white;
+    }
+    50%{
+        fill: #FBC638;
+    }
+    
+    100% {
+        fill: white;
+    }
+}
+
+
+
+/*Formulaire*/
+footer form .in{
+  background-color: #6225E6;
+  border-color: #6225E6;
+}

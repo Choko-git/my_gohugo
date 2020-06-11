@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+
+<title> {{ .Title }}</title>
+<body>
+
+<!-- Mes fichiers membres -->
+{{ partial "head.html" . }}
+{{ partial "header.html" . }}
+
+<div id="Body">
+	<div id="mainBody">
+
+	{{ range (where .Site.RegularPages "Section" "events").ByParam "when" }}
+    	{{ $whenAfter:= time (.Params.when) }}
+            {{ if ge $whenAfter now }}
+
+	    	<div class="event1">
+	    		<div>
+		    	<h3><a href="{{ .URL }}">{{ .Title }}</a><h3>
+		    	<li>{{ dateFormat "Monday 2 Jan, 2006" .Params.when}}</li><br>
+		    	<p>{{ .Summary }}</p><br>
+		    </div>
+		    <img src="{{ .Params.photo }}">
+	</div>
+	 	{{ end}}  	
+	 	{{ end}}  	
+
+	</div>
+</div>
+</div>
+
+
+
+</body>
+
+{{ partial "footer.html" . }}
+
+</html>

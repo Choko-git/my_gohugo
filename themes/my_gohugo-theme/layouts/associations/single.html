@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+
+<title> {{ .Title }}</title>
+<body>
+
+<!-- Mes fichiers membres -->
+{{ partial "head.html" . }}
+{{ partial "header.html" . }}
+
+<!-- Bouton pour afficher les événement passés -->
+<input id="archivedeventsbutton"
+ type="button" class="btn btn-outline-primary" style="margin-left: 45%;" 
+value="Display Past Events" onclick="Hide()">
+
+		<div id="body" style="display: flex;justify-content: space-between;">
+		{{$assoc := lower .Title}}
+		{{ range (where .Site.RegularPages "Section" "events")}}
+		{{if eq (lower .Params.Title) $assoc}}
+		{{ $whenAfter:= time (.Params.when) }}
+        {{ if ge $whenAfter now }}
+
+			<div class="card" style="width: 25rem;">
+				
+		  		<img class="card-img-top" src="{{ .Params.photo }}" alt="Card image cap">
+		  		<div class="card-body">
+		    		<h5 class="card-title">{{ .Params.eventname }}</h5>
+		    		<li>{{ dateFormat "Monday 2 Jan, 2006" .Params.when}}</li>
+		    		<li>{{ .Params.address }}, {{ .Params.postalCode }}, {{ .Params.city}}</li>
+		    		<p class="card-text">{{ .Summary }}</p>
+    				{{ if .Params.categorie }}
+            	    <strong>Catégorie:</strong>
+            	    {{range .Params.categorie}}
+            	     <a>{{ . | urlize }}</a><br><br>
+            	    {{ end}}
+
+	                {{ end}}
+				</div>
+			</div>	 
+		{{ end}}
+	 	{{ end}}
+		{{ end}}
+		
+{{$assoc := lower .Title}}
+{{ range (where .Site.RegularPages "Section" "events")}}
+    {{if eq (lower .Title) $assoc}}
+        
+        <div style="display: none;float: right;"id="body2">
+		
+		{{ $whenAfter:= time (.Params.when) }}
+		{{ if lt $whenAfter now }}
+			<div class="card" style="width: 25rem;">
+				
+		  		<img class="card-img-top" src="{{ .Params.photo }}" alt="Card image cap">
+		  		<div class="card-body">
+		    		<h5 class="card-title">{{ .Params.eventname }}</h5>
+		    		<li>{{ dateFormat "Monday 2 Jan, 2006" .Params.when}}</li>
+		    		<li>{{ .Params.address }}, {{ .Params.postalCode }}, {{ .Params.city}}</li>
+		    		<p class="card-text">{{ .Summary }}</p>
+    				{{ if .Params.categorie }}
+            	    <strong>Catégorie:</strong>
+            	    {{range .Params.categorie}}
+            	     <a>{{ . | urlize }}</a><br><br>
+            	    {{ end}}
+		    		<a href="/associations/{{ lower .Title }}" class="btn btn-primary">{{ .Title}}</a>
+
+	                {{ end}}
+				</div>
+			</div>	 
+		{{ end}}	 	  	
+		</div>     
+    {{ end }}
+{{ end }}
+		</div>  
+
+
+
+
+
+<script type="text/javascript">
+   function Hide() {
+   var valueButton = document.getElementById("archivedeventsbutton").value
+       if(valueButton == "Display Past Events")
+       {
+           document.getElementById("archivedeventsbutton").value = "Hide Past Events";
+           document.getElementById("body2").style.display = 'block';
+       }
+       else
+       {
+           document.getElementById("archivedeventsbutton").value = "Display Past Events";
+           document.getElementById("body2").style.display = 'none';
+       }
+   }
+</script>
+</div>	
+</body>
+
+{{ partial "footer.html" . }}
+
+</html>

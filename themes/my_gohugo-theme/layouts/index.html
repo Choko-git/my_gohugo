@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<html>
+<head>
+
+<title> {{ .Title }}</title>
+<body>
+
+<!-- Mes fichiers membres -->
+{{ partial "head.html" . }}
+{{ partial "header.html" . }}
+/images/100.PNG;		<div class="card bg-dark text-white">
+		  <img  src="/images/100.PNG" class="card-img" alt="...">
+		  <div class="card-img-overlay">
+		    <h5 class="card-title">Card title</h5>
+		    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+		    
+		    <p class="card-text">Last updated 3 mins ago</p>
+		  </div>
+		</div>
+
+		<div id="body">
+
+	
+		{{ range (where .Site.RegularPages "Section" "events").ByParam "when" }}
+		{{ $whenAfter:= time (.Params.when) }}
+		{{ if ge $whenAfter now }}
+		{{ if .Params.important}}
+			<div class="card" style="width: 25rem;">
+				
+		  		<img class="card-img-top" src="{{ .Params.photo }}" alt="Card image cap" style="height: 250px;">
+		  		<div class="card-body">
+		    		<h5 class="card-title">{{ .Params.eventname }}</h5>
+		    		<li>{{ dateFormat "Monday 2 Jan, 2006" .Params.when}}</li>
+		    		<li>{{ .Params.address }}, {{ .Params.postalCode }}, {{ .Params.city}}</li>
+		    		<p class="card-text">{{ .Summary }}</p>
+    				{{ if .Params.categorie }}
+            	    <strong>Catégorie:</strong>
+            	    {{range .Params.categorie}}
+            	     <a>{{ . | urlize }}</a><br><br>
+            	    {{ end}}
+		    		<a href="/associations/{{ lower .Title }}" class="btn btn-primary">{{ .Title}}</a>
+
+	                {{ end}}
+				</div>
+			</div>
+		
+			 
+		{{ end}}
+		{{ end}}
+		{{ end}}
+		</div>  	
+	 	
+		
+</body>
+<style type="text/css">
+	
+	#body{
+		display: flex;
+		margin: 3px;
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+
+	.card .card-body li{
+		font-style: italic;
+		text-decoration: none;
+		list-style: none;
+	}
+</style>
+{{ partial "footer.html" . }}
+
+</html>
+
+
